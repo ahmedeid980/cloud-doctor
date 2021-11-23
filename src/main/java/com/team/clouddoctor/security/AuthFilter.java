@@ -34,7 +34,6 @@ public class AuthFilter extends OncePerRequestFilter {
 			throws ServletException, IOException {
 
 		 final String header = request.getHeader(TOKEN_HEADER);
-		 System.out.println("header: " + header);
 		 final SecurityContext securityContext = SecurityContextHolder.getContext();
 		 
 		 if(header != null && securityContext.getAuthentication() == null) {

@@ -47,15 +47,14 @@ public class UserService implements UserDetailsService {
 		return userById;
 	}
 
-//	// save new user
-//	public User saveUser(User user) {
-//		System.out.println("password : " +user.getPassword());
-//		user.setPassword(this.passwordEncoder().encode(user.getPassword()));
-//		user.setDateModify(new Date());
-//		user.setCode((System.currentTimeMillis()+12)+3000);
-//		User newUser = userRepository.save(user);
-//		return newUser;
-//	}
+	// save new user
+	public User saveUser(User user) {
+		System.out.println("password : " +user.getPassword());
+		user.setPassword(this.passwordEncoder().encode(user.getPassword()));
+		
+		User newUser = userRepository.save(user);
+		return newUser;
+	}
 
 	// delete user
 	public void deleteUser(int id) {

@@ -13,7 +13,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.team.clouddoctor.entities.User;
-import com.team.clouddoctor.security.JwtResponse;
+import com.team.clouddoctor.security.JsonTemplateResponse;
 import com.team.clouddoctor.security.LoginRequest;
 import com.team.clouddoctor.security.TokenUtil;
 import com.team.clouddoctor.services.UserService;
@@ -21,7 +21,7 @@ import com.team.clouddoctor.uibean.UserUIBean;
 
 @CrossOrigin
 @RestController
-@RequestMapping(value="/userlogin/auth")
+@RequestMapping(value="/CloudDoctor/Authorization")
 public class AuthController {
 
 	@Autowired
@@ -34,7 +34,7 @@ public class AuthController {
 	private AuthenticationManager authenticationManager;
 
 	@PostMapping(value = {"","/"})
-	public JwtResponse Login(@RequestBody LoginRequest loginRequest) {
+	public JsonTemplateResponse Login(@RequestBody LoginRequest loginRequest) {
 		final Authentication authentication = authenticationManager.authenticate(
 			new UsernamePasswordAuthenticationToken(loginRequest.getUsername(), loginRequest.getPassword())
 		);
@@ -42,31 +42,17 @@ public class AuthController {
 		
 		UserDetails userDetails = userService.loadUserByUsername(loginRequest.getUsername());
 		String token = null;
-		JwtResponse jwtResponse = null;
+		JsonTemplateResponse jsonTemplateResponse = null;
 		if(userDetails != null) {
 			token = tokenUtil.generateToken(userDetails);
-			jwtResponse = new JwtResponse(token , "you have a new token" , userDetails);
+			jsonTemplateResponse = new JsonTemplateResponse(token , "you have a new token" , userDetails);
 		} else {
-			jwtResponse = new JwtResponse(null , "username or password invalid, "
+			jsonTemplateResponse = new JsonTemplateResponse(null , "username or password invalid, "
 					+ "try again later or you can register this login again" ,null);
 		}
 		
 		
-		return jwtResponse;
+		return jsonTemplateResponse;
 	}
-	
-//	@PostMapping(value="/register")
-//	public User register(@RequestBody UserUIBean userUI) {
-//		
-//		User newUser = new User();
-//		newUser.setEmail(userUI.getEmail());
-//		newUser.setUserName(userUI.getUsername());
-//		newUser.setPassword(userUI.getPassword());
-//		newUser.setIsAdmin(0);
-//		
-//		User saveUser = userService.saveUser(newUser);
-//		return saveUser;
-//		
-//	}
 
 }

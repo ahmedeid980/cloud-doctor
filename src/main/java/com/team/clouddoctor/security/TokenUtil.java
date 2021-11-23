@@ -34,9 +34,7 @@ public class TokenUtil {
 				.setExpiration(generateExpirationDate())
 				.signWith(SignatureAlgorithm.HS512, SECRET_KEY)
 				.compact();
-		
-		System.out.println("token from generate token : " + newToken);
-		
+				
 		return newToken;
 	}
 	
@@ -69,7 +67,6 @@ public class TokenUtil {
 	}
 	
 	private Claims getClaims(String token) {
-		System.out.println("token : " + token);
 		Claims claims;
 		try {
 			claims = Jwts.parser().setSigningKey(SECRET_KEY)

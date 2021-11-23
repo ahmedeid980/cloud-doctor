@@ -41,7 +41,6 @@ public class User implements UserDetails {
 	private String email;
 
 	@NotNull
-	@JsonIgnore
 	@Column(name = "phone")
 	private String phone;
 	
@@ -50,7 +49,6 @@ public class User implements UserDetails {
 	@Column(name = "password")
 	private String password;
 	
-	@NotNull
 	@JsonIgnore
 	@Column(name = "token")
 	private String token;
@@ -58,6 +56,7 @@ public class User implements UserDetails {
 	@Column(name = "is_block")
 	private int isBlock;
 
+	@NotNull
 	@Column(name = "modified_date")
 	private Date modifiedDate;
 

@@ -4,17 +4,17 @@ import org.springframework.security.core.userdetails.UserDetails;
 
 import com.team.clouddoctor.entities.User;
 
-public class JwtResponse {
+public class JsonTemplateResponse {
 
 	private String token;
 	private String message;
 	private UserDetails user;
 
-	public JwtResponse(String token) {
+	public JsonTemplateResponse(String token) {
 		this.token = token;
 	}
 
-	public JwtResponse(String token, String message, UserDetails user) {
+	public JsonTemplateResponse(String token, String message, UserDetails user) {
 		super();
 		this.token = token;
 		this.message = message;
