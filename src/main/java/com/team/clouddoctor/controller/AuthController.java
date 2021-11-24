@@ -12,13 +12,14 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
-import com.team.clouddoctor.entities.User;
 import com.team.clouddoctor.security.JsonTemplateResponse;
 import com.team.clouddoctor.security.LoginRequest;
 import com.team.clouddoctor.security.TokenUtil;
 import com.team.clouddoctor.services.UserService;
-import com.team.clouddoctor.uibean.UserUIBean;
 
+import io.swagger.annotations.Api;
+
+@Api(value = "Authorization", tags = "Authorization", description = "Authorization Endpoints")
 @CrossOrigin
 @RestController
 @RequestMapping(value="/CloudDoctor/Authorization")

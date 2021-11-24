@@ -12,9 +12,23 @@ import org.springframework.security.web.authentication.UsernamePasswordAuthentic
 public class SecurityConfig extends WebSecurityConfigurerAdapter {
 
 	private final String[] PUBLIC_ENDPOINT = {
-			"/CloudDoctor/Authorization", "CloudDoctor/Authorization/"
+			"/CloudDoctor/Authorization", "CloudDoctor/Authorization/,/test"
 	};
 
+	 private static final String[] AUTH_WHITELIST = {
+	            // -- Swagger UI v2
+	            "/v2/api-docs",
+	            "/swagger-resources",
+	            "/swagger-resources/**",
+	            "/configuration/ui",
+	            "/configuration/security",
+	            "/swagger-ui.html",
+	            "/webjars/**",
+	            // -- Swagger UI v3 (OpenAPI)
+	            "/v3/api-docs/**",
+	            "/swagger-ui/**"
+	            // other public endpoints of your API may be appended to this array
+	    };
 	@Bean
 	@Override
 	protected AuthenticationManager authenticationManager() throws Exception {
@@ -35,9 +49,10 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
 				.and()
 			.authorizeRequests()
 				.antMatchers(PUBLIC_ENDPOINT).permitAll()
+				.antMatchers(AUTH_WHITELIST).permitAll()
 				.anyRequest().authenticated()
 				.and()
 			.addFilterBefore(AuthFilter(), UsernamePasswordAuthenticationFilter.class);
 	}
-	
+	 
 }
