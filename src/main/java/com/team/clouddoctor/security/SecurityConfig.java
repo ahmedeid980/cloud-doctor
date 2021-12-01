@@ -12,7 +12,7 @@ import org.springframework.security.web.authentication.UsernamePasswordAuthentic
 public class SecurityConfig extends WebSecurityConfigurerAdapter {
 
 	private final String[] PUBLIC_ENDPOINT = {
-			"/CloudDoctor/Authorization", "CloudDoctor/Authorization/,/test"
+			"/CloudDoctor/Authorization", "CloudDoctor/Authorization/,/test","/temp/user"
 	};
 
 	 private static final String[] AUTH_WHITELIST = {
