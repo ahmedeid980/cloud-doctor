@@ -7,6 +7,8 @@ import org.springframework.stereotype.Component;
 import com.team.clouddoctor.dto.CommonResponseDto;
 import com.team.clouddoctor.dto.TempUserDto;
 import com.team.clouddoctor.entities.TempUser;
+import com.team.clouddoctor.exception.ErrorCodes;
+import com.team.clouddoctor.exception.MissingOrBadParameterException;
 import com.team.clouddoctor.mapper.TempUserMapper;
 import com.team.clouddoctor.services.TempUserService;
 import com.team.clouddoctor.utils.ResponseUtil;
@@ -21,9 +23,9 @@ public class TempUserFacade {
 
 	public CommonResponseDto saveTempUser(TempUserDto tempUserRequestDto) {
 
-//		if (tempUserDto.getUserId() == null || tempUserDto.getEmail() == null || tempUserDto.getUserName() == null) {
-//			throw new MissingOrBadParameterException(ErrorCodes.getErrorMessage(50101), 50101);
-//		}
+		if (tempUserRequestDto.getUserId() == null || tempUserRequestDto.getEmail() == null || tempUserRequestDto.getUserName() == null) {
+			throw new MissingOrBadParameterException(ErrorCodes.USER_PARAM_REQUIRED.getMessage(),ErrorCodes.USER_PARAM_REQUIRED.getCode());
+		}
 
 		TempUser tempUser = tempUserMapper.mapToEntity(tempUserRequestDto);
 		TempUser user = tempUserService.saveUser(tempUser);

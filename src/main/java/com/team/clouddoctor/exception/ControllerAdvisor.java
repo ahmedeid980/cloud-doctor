@@ -13,6 +13,18 @@ import com.team.clouddoctor.utils.ResponseUtil;
 public class ControllerAdvisor extends ResponseEntityExceptionHandler {
 	ResponseUtil responseUtil = new ResponseUtil();
 
+	@ExceptionHandler(MissingOrBadParameterException.class)
+	public ResponseEntity<CommonResponseDto> handleMissingOrBadParameterException(
+			MissingOrBadParameterException ex) {
+
+		CommonResponseDto commonResponse = new CommonResponseDto();
+		commonResponse.setCode((int) ex.getCode());
+		commonResponse.setMessage(ex.getMessage());
+		commonResponse.setSuccess(false);
+		commonResponse.setData(null);
+		return new ResponseEntity<>(commonResponse, HttpStatus.OK);
+	}
+	
 	@ExceptionHandler(InsufficientAuthenticationException.class)
 	public ResponseEntity<CommonResponseDto> handleInvalidRequestStatusException(
 			InsufficientAuthenticationException ex) {
